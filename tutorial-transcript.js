@@ -6,7 +6,11 @@
 // The title is used to identify the tutorial, and the transcript contains the text to be searched.
 
 window.TUTORIAL_INDEX = [
-  // ===== Set Up Your Course =====
+  
+  // ============================
+  // === Set Up Your Course =====
+  // ============================
+  
   {
     title: "Course Author Page Overview",
     transcript: `Course Author Page Overview: This is the course author landing page. On the left side, you will see the workspace menu, which confirms that you are logged in as an author. If you ever need to switch roles, you can do so by selecting a different role from this menu. On a course author page, you will find a list of all your projects, also known as courses. From here you can easily access each project. Now, let's get started by creating a new project.`
@@ -45,7 +49,10 @@ window.TUTORIAL_INDEX = [
     transcript: `Transformation Payment Code: ...`
   },
 
-  // ===== Develop Your Course =====
+  // ============================
+  // === Develop Your Course ====
+  // ============================
+
   {
     title: "Learning Objectives",
     transcript: `Learning Objectives: Learning objectives are the foundation of backward design and analysis. Attach objectives to pages and activities. See the CMU Eberly Center guide to learn why mapping objectives matters for student success.`
