@@ -9,17 +9,17 @@
 </head>
 <body>
   <header class="header">
-  <div class="header-left">
-    <button id="menu-toggle" class="menu-toggle">☰</button>
+    <div class="header-left">
+      <button id="menu-toggle" class="menu-toggle">☰</button>
 
-    <a href="/" class="brand" aria-label="OLI Torus Launchpad (home)">
-      <img src="assets/images/logo.png" alt="" class="brand-logo" aria-hidden="true" />
-      <span class="brand-oli">OLI</span>
-      <span class="brand-torus">Torus</span>
-      <span class="brand-sub">Launchpad</span>
-    </a>
-    <a href="https://proton.oli.cmu.edu/" class="open-torus" target="_blank">LAUNCH TORUS</a>
-  </div>
+      <a href="/" class="brand" aria-label="OLI Torus Launchpad (home)">
+        <img src="assets/images/logo.png" alt="" class="brand-logo" aria-hidden="true" />
+        <span class="brand-oli">OLI</span>
+        <span class="brand-torus">Torus</span>
+        <span class="brand-sub">Launchpad</span>
+      </a>
+      <a href="https://proton.oli.cmu.edu/" class="open-torus" target="_blank">LAUNCH TORUS</a>
+    </div>
     <div class="header-right">
       <a href="#" class="search-tutorial-btn" aria-label="Search Tutorial">
         <span class="search-text">Search this Tutorial</span>
@@ -41,6 +41,8 @@
 
   <div class="main-container">
     <nav class="sidebar">
+
+      <!-- Introduction -->
       <div class="menu-section">
         <div class="section-title" role="button" tabindex="0" aria-expanded="false">
           <span class="title-text">Introduction</span>
@@ -59,6 +61,8 @@
         </ul>
       </div>
 
+      <!-- COURSE AUTHOR SECTIONS -->
+      <div class="role-header">Author</div>
       <div class="menu-section">
         <div class="section-title" onclick="toggleSection(this)">
           <span class="title-text">Set Up Your Course</span>
@@ -70,48 +74,31 @@
           </span>
         </div>
         <ul class="submenu">
-          <li data-title="Course Author Page Overview"
-              data-page="pages/set-up-your-course/course-author-page-overview.html">
+          <li data-title="Course Author Page Overview" data-page="pages/set-up-your-course/course-author-page-overview.html">
             <span class="title">Course Author Page Overview</span>
           </li>
-
-          <li data-title="Create a New Project"
-              data-page="pages/set-up-your-course/create-a-new-project.html">
+          <li data-title="Create a New Project" data-page="pages/set-up-your-course/create-a-new-project.html">
             <span class="title">Create a New Project</span>
           </li>
-
-          <li data-title="Set Up Your Project (Course Overview)"
-              data-page="pages/set-up-your-course/course-overview.html">
+          <li data-title="Set Up Your Project (Course Overview)" data-page="pages/set-up-your-course/course-overview.html">
             <span class="title">Set Up Your Project: <em>Course Overview</em></span>
           </li>
-
-          <li data-title="Details, Collaborators, and Visibility"
-              data-page="pages/set-up-your-course/collaborators-visibility.html">
+          <li data-title="Details, Collaborators, and Visibility" data-page="pages/set-up-your-course/collaborators-visibility.html">
             <span class="title">Collaborators Visibility</span>
           </li>
-
-          <li data-title="Project Attributes"
-              data-page="pages/set-up-your-course/project-attributes.html">
+          <li data-title="Project Attributes" data-page="pages/set-up-your-course/project-attributes.html">
             <span class="title">Project Attributes</span>
           </li>
-
-          <li data-title="Project Labels"
-              data-page="pages/set-up-your-course/project-labels.html">
+          <li data-title="Project Labels" data-page="pages/set-up-your-course/project-labels.html">
             <span class="title">Project Labels</span>
           </li>
-
-          <li data-title="Advanced Activities"
-              data-page="pages/set-up-your-course/advanced-activities.html">
+          <li data-title="Advanced Activities" data-page="pages/set-up-your-course/advanced-activities.html">
             <span class="title">Advanced Activities</span>
           </li>
-
-          <li data-title="Discussion, Notes, and Survey"
-              data-page="pages/set-up-your-course/discussion-notes-survey.html">
+          <li data-title="Discussion, Notes, and Survey" data-page="pages/set-up-your-course/discussion-notes-survey.html">
             <span class="title">Discussion, Notes, and Survey</span>
           </li>
-
-          <li data-title="Transformation Payment Code"
-              data-page="pages/set-up-your-course/transformation-payment-code.html">
+          <li data-title="Transformation Payment Code" data-page="pages/set-up-your-course/transformation-payment-code.html">
             <span class="title">Transformation Payment Code</span>
           </li>
         </ul>
@@ -132,7 +119,6 @@
           <li data-page="pages/develop-your-course/create-learning-objectives.html"><span>Create Learning Objectives</span></li>
           <li data-page="pages/develop-your-course/create-sub-objectives.html"><span>Create Sub-Objectives</span></li>
           <li data-page="pages/develop-your-course/create-containers.html"><span>Create Containers</span></li>
-          <li data-page="pages/develop-your-course/curriculum.html"><span>Curriculum: <em>Edit Course Structure and Content</em></span></li>
           <li data-page="pages/develop-your-course/create-a-page.html"><span>Create a Page</span></li>
           <li data-page="pages/develop-your-course/practice-page-options.html"><span>Practice Page Options</span></li>
           <li data-page="pages/develop-your-course/edit-save-page.html"><span>Edit & Save Page</span></li>
@@ -154,20 +140,59 @@
           <li data-page="pages/develop-your-course/add-order-questions.html"><span>Add Order Questions</span></li>
           <li data-page="pages/develop-your-course/content-break.html"><span>Content Break</span></li>
           <li data-page="pages/develop-your-course/page-outline.html"><span>Page Outline</span></li>
-
-          <li data-title="Activity Bank"
-              data-page="pages/develop-your-course/activity-bank.html">
+          <li data-title="Activity Bank" data-page="pages/develop-your-course/activity-bank.html">
             <span class="title">Activity Bank</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- INSTRUCTOR SECTIONS -->
+      <div class="role-header">Instructor</div>
+      <div class="menu-section">
+        <div class="section-title" onclick="toggleSection(this)">
+          <span class="title-text">Link Course to LMS</span>
+          <span class="caret" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16">
+              <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+        <ul class="submenu">
+          <li data-title="Add and Configure OLI Torus to Canvas"
+              data-page="pages/link-course-to-lms/add-to-canvas.html">
+            <span class="title">Add and Configure OLI Torus to Canvas</span>
+          </li>
+        </ul>
+      </div>
+<div class="menu-section">
+        <div class="section-title" onclick="toggleSection(this)">
+          <span class="title-text">Scheduling and Assessment</span>
+          <span class="caret" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16">
+              <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          </div>
+        <ul class="submenu">
+          <li data-title="How to Use the Scheduling Tool in OLI Torus"
+              data-page="pages/file_name/schedule-setting.html">
+            <span class="title">How to Use the Scheduling Tool in OLI Torus</span>
           </li>
         </ul>
       </div>
     </nav>
 
+    
     <main class="content">
       <!-- Tutorial content (e.g., video, text) goes here -->
     </main>
   </div>
 
+
+
+  
   <script src="main.js"></script>
 
   <!-- Overlay lives outside the injected HTML -->

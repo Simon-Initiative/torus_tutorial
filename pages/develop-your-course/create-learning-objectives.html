@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create a New Project</title>
+
+  <!-- Existing site styles (includes .video-container, .title-bar, .page-content) -->
+  <link rel="stylesheet" href="./style.css" />
+
+  <!-- Optional: silence favicon 404 in dev -->
+  <link rel="icon" href="data:,">
+</head>
+<body>
+
+  <div class="video-container">
+    <video
+      controls
+      preload="metadata"
+      playsinline
+      style="width:100%;height:auto;display:block;background:#000;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);"
+      >
+      <!-- UPDATE THIS: video file -->
+      <source src="./assets/videos/develop-your-course/create-learning-objectives.mp4" type="video/mp4" />
+
+      <!-- UPDATE THIS: captions file -->
+      <track
+        src="./assets/captions/develop-your-course/create-learning-objectives.vtt"
+        kind="subtitles"
+        srclang="en"
+        label="English"
+        default
+      />
+
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- UPDATE THIS: video title -->
+    <div class="title-bar">
+      Create Learning Objectives
+    </div>
+
+    <div class="page-content">
+      <p>Text</p>
+    </div>
+  </div>
+
+</body>
+</html>
