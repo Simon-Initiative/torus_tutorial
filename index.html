@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -149,6 +150,21 @@
           </li>
         </ul>
       </div>
+
+       <div class="menu-section">
+        <div class="section-title" onclick="toggleSection(this)">
+          <span class="title-text">Publish Your Course</span>
+          <span class="caret" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16">
+              <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+
+        <ul class="submenu">
+          <li data-page="pages/publish-your-course/review-your-course.html"><span>Review Your Course</span></li>
+        </ul>
 
       <!-- INSTRUCTOR SECTIONS -->
       <div class="role-header">Instructor</div>

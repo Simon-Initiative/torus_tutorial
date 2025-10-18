@@ -15,6 +15,35 @@ console.log('main.js loaded');
     badge.setAttribute('aria-hidden', 'true');
   });
 
+  // Enable in-panel SPA navigation for data-page elements inside .content too
+document.addEventListener('click', function (event) {
+  const target = event.target.closest('[data-page]');
+  if (!target) return;
+
+  // Prevent full page reload
+  event.preventDefault();
+
+  const page = target.getAttribute('data-page');
+  if (!page) return;
+
+  // Highlight selected state if you want
+  document.querySelectorAll('.submenu li').forEach(li => li.classList.remove('selected'));
+
+  // Load the HTML into the main content area
+  fetch(page)
+    .then(response => response.text())
+    .then(html => {
+      const content = document.querySelector('.content');
+      if (content) {
+        content.innerHTML = html;
+        // Optional: scroll to top after load
+        content.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    })
+    .catch(err => console.error('Error loading page:', err));
+});
+
+
   // --- fuzzy matching helpers (used by search overlay) ---
   const _norm = (s) => String(s || '')
     .toLowerCase()
@@ -225,5 +254,41 @@ console.log('main.js loaded');
     li.classList.add('spotlight');
     setTimeout(() => li.classList.remove('spotlight'), 1100);
   });
+
+// --- Role-card spotlight navigation (for Logging In page) ---
+document.addEventListener('click', (e) => {
+  const card = e.target.closest('.role-card[data-page]');
+  if (!card) return;
+
+  e.preventDefault();
+  const page = card.getAttribute('data-page');
+  if (!page) return;
+
+  // Find matching sidebar item
+  const li = document.querySelector(`.submenu li[data-page="${page}"]`);
+  if (!li) {
+    console.warn('No matching sidebar item for:', page);
+    return;
+  }
+
+  // Expand the section if collapsed
+  const submenu = li.closest('.submenu');
+  if (submenu && submenu.classList.contains('collapsed')) {
+    const header = submenu.previousElementSibling;
+    if (header) header.click();
+  }
+
+  // Select and trigger load
+  li.classList.add('selected');
+  li.click();
+
+  // Smooth scroll and spotlight (uses your existing functions)
+  const container = getScrollContainer(li);
+  scrollIntoViewWithin(container, li);
+
+  li.classList.add('spotlight');
+  setTimeout(() => li.classList.remove('spotlight'), 1100);
+});
+
 
 })();
