@@ -1,0 +1,15 @@
+/* Hide sub menus for testing */
+.submenu li[data-page="pages/introduction/what-is-torus.html"],
+.submenu li[data-page="pages/introduction/why-torus.html"],
+.submenu li[data-page="pages/set-up-your-course/advanced-activities.html"],
+.submenu li[data-page="pages/set-up-your-course/discussion-notes-survey.html"],
+.submenu li[data-page="pages/set-up-your-course/transformation-payment-code.html"],
+.submenu li[data-page="pages/set-up-your-course/project-attributes.html"],
+.submenu li[data-page="pages/develop-your-course/activity-bank.html"],
+.submenu li[data-page="pages/develop-your-course/create-sub-objectives"]
+
+
+
+{
+  display: none !important;
+}

@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>OLI Torus Launchpad</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="temp-hide.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
 </head>
 <body>
@@ -14,11 +15,12 @@
       <button id="menu-toggle" class="menu-toggle">☰</button>
 
       <a href="/" class="brand" aria-label="OLI Torus Launchpad (home)">
-        <img src="assets/images/logo.png" alt="" class="brand-logo" aria-hidden="true" />
-        <span class="brand-oli">OLI</span>
-        <span class="brand-torus">Torus</span>
-        <span class="brand-sub">Launchpad</span>
-      </a>
+  <img src="assets/images/logo.png" alt="" class="brand-logo" aria-hidden="true" />
+  <span class="brand-oli">OLI</span>
+  <span class="brand-torus">Torus</span>
+  <span class="brand-sub">Launchpad</span>
+</a>
+
       <a href="https://proton.oli.cmu.edu/" class="open-torus" target="_blank">LAUNCH TORUS</a>
     </div>
     <div class="header-right">
@@ -31,12 +33,17 @@
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
       </a>
+<a href="https://forms.gle/3ta7TqVyWjRdgTmx9" 
+   target="_blank" 
+   class="feedback-btn" 
+   aria-label="Feedback">
+  <img src="assets/images/feedback.png" alt="Feedback" class="feedback-icon" />
+</a>
 
       <button class="home-btn" aria-label="Home" data-page="pages/introduction/logging-in.html">
-        <svg class="home-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
-          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-        </svg>
-      </button>
+  <img src="assets/images/home.png" alt="Home" class="home-icon" />
+</button>
+
     </div>
   </header>
 
@@ -121,7 +128,6 @@
         </div>
         <ul class="submenu">
           <li data-page="pages/develop-your-course/learning-objectives.html"><span>Learning Objectives</span></li>
-          <li data-page="pages/develop-your-course/create-learning-objectives.html"><span>Create Learning Objectives</span></li>
           <li data-page="pages/develop-your-course/create-sub-objectives.html"><span>Create Sub-Objectives</span></li>
           <li data-page="pages/develop-your-course/create-containers.html"><span>Create Containers</span></li>
           <li data-page="pages/develop-your-course/create-a-page.html"><span>Create a Page</span></li>

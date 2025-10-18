@@ -1,10 +1,35 @@
 // main.js
 console.log('main.js loaded');
 
+
+
 (function () {
   // --- small DOM helpers ---
   const $all = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   const $ = (sel, root = document) => root.querySelector(sel);
+
+  // =============================================================
+// Load welcome page by default on first visit
+// =============================================================
+window.addEventListener("DOMContentLoaded", () => {
+  const content = document.querySelector(".content");
+  if (content) {
+    fetch("pages/introduction/welcome.html")
+      .then(r => r.text())
+      .then(html => {
+        content.innerHTML = html;
+        // Optionally highlight the matching menu item
+        const li = document.querySelector('.submenu li[data-page="pages/welcome.html"]');
+        if (li) {
+          document.querySelectorAll(".submenu li.selected").forEach(el => el.classList.remove("selected"));
+          li.classList.add("selected");
+        }
+      })
+      .catch(err => console.error("Error loading welcome page:", err));
+  }
+});
+
+
 
   // clean up badges in the sidebar so text isn’t duplicated in labels
   document.querySelectorAll('.submenu .badge').forEach(badge => {
@@ -14,21 +39,24 @@ console.log('main.js loaded');
     }
     badge.setAttribute('aria-hidden', 'true');
   });
+ 
+  function setActiveMenuItem(li) {
+  document.querySelectorAll('.submenu li.selected').forEach(el => el.classList.remove('selected'));
+  if (li) li.classList.add('selected');
+}
 
   // Enable in-panel SPA navigation for data-page elements inside .content too
 document.addEventListener('click', function (event) {
   const target = event.target.closest('[data-page]');
   if (!target) return;
+  setActiveMenuItem(target);
 
   // Prevent full page reload
   event.preventDefault();
 
   const page = target.getAttribute('data-page');
   if (!page) return;
-
-  // Highlight selected state if you want
-  document.querySelectorAll('.submenu li').forEach(li => li.classList.remove('selected'));
-
+  
   // Load the HTML into the main content area
   fetch(page)
     .then(response => response.text())
