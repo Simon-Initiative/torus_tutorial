@@ -5,11 +5,11 @@
   <title>Get Started: Logging In</title>
   <style>
     :root {
-      --bg1:#3657f0;
-      --bg2:#e36ccf;
-      --author:#EBAAF2;
-      --instructor:#99cdb5;
-      --student:#0a4cc5;
+      --bg1: #3657f0;
+      --bg2: #e36ccf;
+      --author: #D29CE7;
+      --instructor: #82C1AA;
+      --student: #0a4cc5;
     }
 
     html, body, .content {
@@ -19,6 +19,7 @@
       height: 100%;
       overflow: hidden;
       background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      font-family: 'Open Sans', sans-serif;
     }
 
     #login-hero {
@@ -67,49 +68,59 @@
       display: flex;
       justify-content: center;
       align-items: stretch;
-      gap: 30px;
+      gap: 36px;
       flex-wrap: wrap;
       width: 100%;
-      max-width: 900px;
+      max-width: 950px;
     }
 
     .role-card {
-      width: 240px;
-      height: 240px;
-      border-radius: 18px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      display: grid;
+      grid-template-rows: 90px 34px 3.8em;
+      justify-items: center;
       align-items: center;
+      width: 280px;
+      height: 260px;
+      padding: 24px 24px;
+      border-radius: 20px;
       text-align: center;
       cursor: pointer;
-      padding: 20px;
-      color: #fff;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-      transition: transform .2s ease, box-shadow .2s ease;
-      user-select: none;
+      transition: transform .25s ease, box-shadow .25s ease;
     }
 
     .role-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 28px rgba(0,0,0,.3);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+    }
+
+    .role-icon {
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      align-self: center;
+      transition: transform 0.3s ease;
+    }
+
+    .role-card:hover .role-icon {
+      transform: scale(1.08);
     }
 
     .role-card h2 {
-      margin: 0 0 10px;
-      font-size: 22px;
+      margin: 0;
+      line-height: 1;
+      font-size: 1.25rem;
       font-weight: 700;
       color: #fff;
     }
 
     .role-card p {
       margin: 0;
-      font-size: 16px;
       line-height: 1.4;
-      color: #fff;
+      color: rgba(255,255,255,.9);
+      max-width: 90%;
     }
 
-    /* Matching the Welcome page color style */
     .role-card.author     { background: var(--author); }
     .role-card.instructor { background: var(--instructor); }
     .role-card.student    { background: var(--student); }
@@ -117,7 +128,7 @@
     .note {
       font-size: 15px;
       font-weight: 500;
-      margin-top: 30px;
+      margin-top: 40px;
       color: #fff;
     }
 
@@ -125,12 +136,13 @@
       h1 { font-size: 42px; }
       .inner { padding: 24px; }
       .role-card {
-        width: 100%;
-        max-width: 320px;
+        grid-template-rows: 80px 30px auto;
         height: auto;
+        width: 90%;
+        max-width: 320px;
         padding: 24px;
       }
-      .role-grid { gap: 20px; }
+      .role-grid { gap: 24px; }
     }
   </style>
 </head>
@@ -149,6 +161,7 @@
           class="role-card author"
           data-page="pages/set-up-your-course/course-author-page-overview.html"
           aria-label="Author">
+          <img src="assets/images/author.svg" alt="Author icon" class="role-icon" />
           <h2>Author</h2>
           <p>I am designing, developing, or editing course content.</p>
         </li>
@@ -157,6 +170,7 @@
           class="role-card instructor"
           data-page="pages/link-course-to-lms/add-to-canvas.html"
           aria-label="Instructor">
+          <img src="assets/images/instructor.svg" alt="Instructor icon" class="role-icon" />
           <h2>Instructor</h2>
           <p>I am teaching a course.</p>
         </li>
@@ -165,6 +179,7 @@
           class="role-card student"
           data-page="pages/student-view/student-view.html"
           aria-label="Student">
+          <img src="assets/images/student.svg" alt="Student icon" class="role-icon" />
           <h2>Student</h2>
           <p>I am taking a course.</p>
         </li>

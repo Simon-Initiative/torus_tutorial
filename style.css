@@ -74,7 +74,6 @@ html, body { height: 100%; margin: 0; background: var(--bg); color: var(--text);
 }
 
 .feedback-btn {
-  src: url('https://docs.google.com/forms/d/e/1FAIpQLSfLoRRVoEo3j3tRNDjTAsgxoHGybrrVKAGAk56ceoew3nPGBw/viewform?usp=dialog');
   background-color: #34a853;    
   width: 44px;
   padding: 0;
