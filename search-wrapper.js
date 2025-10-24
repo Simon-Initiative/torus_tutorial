@@ -1,10 +1,9 @@
-// search-wrapper.js — live search + relevance ranking + multi-word "Did you mean" + persistence
+// search-wrapper.js — live search + relevance ranking + smart typo correction + “showing results for”
 (function () {
   const PAGE_SIZE   = 3;
   const DEBOUNCE_MS = 150;
   const STORE_KEY   = 'tutorialSearchState';
 
-  // Chips shown when input is empty
   const SUGGESTIONS = [
     'new project',
     'learning objectives',
@@ -28,7 +27,6 @@
     return esc(text).replace(re, '<mark>$1</mark>');
   }
 
-  // Simple Levenshtein (small words)
   function levenshtein(a, b){
     if (a === b) return 0;
     const m = a.length, n = b.length;
@@ -55,7 +53,7 @@
     'this','that','your','you','from','or','are','can','will','into','an','any'
   ]);
 
-  // Build small dictionary from titles + frequent transcript words
+  // ---------- dictionary ----------
   function buildDictionary(index){
     const counts = new Map();
     const bump = (w) => counts.set(w, (counts.get(w) || 0) + 1);
@@ -79,11 +77,9 @@
     return counts;
   }
 
-  // Return up to `limit` candidate corrections for a single token
   function suggestCorrections(word, dict, limit = 2){
     if (!word || word.length < 3) return [];
     const maxDist = word.length <= 4 ? 1 : word.length <= 7 ? 2 : 3;
-
     const cand = [];
     for (const [w, freq] of dict.entries()) {
       if (w === word) continue;
@@ -92,28 +88,23 @@
       if (d <= maxDist) cand.push({ w, d, freq });
     }
     cand.sort((a,b) => (a.d - b.d) || (b.freq - a.freq) || a.w.localeCompare(b.w));
-
     const out = [];
     for (const c of cand) { if (!out.includes(c.w)) out.push(c.w); if (out.length >= limit) break; }
     return out;
   }
 
-  // Build fast-lookups for ranking suggestions
   function buildLookups(index){
     const titleSet = new Set();
     const keywordSet = new Set();
     for (const it of index || []) {
       const t = normalize(it.title || '');
       if (t) titleSet.add(t);
-      if (Array.isArray(it.keywords)) {
-        for (const kw of it.keywords) keywordSet.add(normalize(kw));
-      }
+      if (Array.isArray(it.keywords)) for (const kw of it.keywords) keywordSet.add(normalize(kw));
     }
     const chipSet = new Set(SUGGESTIONS.map(normalize));
     return { titleSet, keywordSet, chipSet };
   }
 
-  // Rank phrase suggestions using simple heuristics
   function rankSuggestions(phrases, dict, lookups){
     const { titleSet, keywordSet, chipSet } = lookups;
     const scored = [];
@@ -130,21 +121,14 @@
     return scored.map(x => x.p);
   }
 
-  // Aggressive: try correcting multiple words at once (bounded search)
-  function suggestCorrectionsForQuery(query, dict, lookups) {
+  // ---------- NEW: validate corrections ----------
+  function suggestCorrectionsForQuery(query, dict, lookups, index) {
     const tokens = tokenize(query);
     if (!tokens.length) return [];
 
-    // Per-token correction candidates (include original token)
-    const perToken = tokens.map(tok => {
-      const corr = suggestCorrections(tok, dict, 2);
-      return [tok, ...corr];
-    });
-
-    // Generate combinations, but cap expansions to avoid blowup
+    const perToken = tokens.map(tok => [tok, ...suggestCorrections(tok, dict, 2)]);
     const suggestions = new Set();
     const MAX_COMBOS = 128;
-
     function dfs(i, cur){
       if (suggestions.size >= MAX_COMBOS) return;
       if (i === perToken.length) {
@@ -162,7 +146,15 @@
     dfs(0, []);
 
     const ranked = rankSuggestions(Array.from(suggestions), dict, lookups);
-    return ranked.slice(0, 5);
+
+    // Only keep those that actually have transcript hits
+    const valid = [];
+    for (const s of ranked) {
+      const res = rankedSearch(s, index);
+      if (res.length > 0) valid.push({ phrase: s, hits: res.length });
+      if (valid.length >= 5) break;
+    }
+    return valid.map(v => v.phrase);
   }
 
   function makeSnippet(source, words){
@@ -241,7 +233,7 @@
     return score;
   }
 
-  // Return ranked matches with score and snippet
+  // ---------- ranked search ----------
   function rankedSearch(query, index){
     const qTokens = tokenize(query);
     if (!qTokens.length) return [];
@@ -254,7 +246,6 @@
       const tl = title.toLowerCase();
       const bl = body.toLowerCase();
 
-      // allow tokens across combined title+body
       const combo = tl + ' ' + bl;
       const hit = qTokens.every(w => combo.includes(w));
       if (!hit) continue;
@@ -272,18 +263,15 @@
       });
     }
 
-    // Sort by score desc, then shorter title, then alpha
     scored.sort((a,b) => (b.score - a.score)
       || (a.layer.length - b.layer.length)
       || a.layer.localeCompare(b.layer));
-
     return scored;
   }
 
   function renderBatch(resultsEl, items, start, count, navigate){
     const tpl = resultsEl.closest('#searchModal')?.querySelector('#sw-result-template');
     const end = Math.min(items.length, start + count);
-
     for (let i = start; i < end; i++) {
       const { layer, snippetHtml } = items[i];
       if (tpl) {
@@ -291,40 +279,15 @@
         node.querySelector('.sw-layer').textContent = layer;
         node.querySelector('.sw-quote').innerHTML = snippetHtml;
         node.querySelector('.sw-btn').addEventListener('click', (e) => {
-          e.preventDefault();
-          navigate?.(layer);
+          e.preventDefault(); navigate?.(layer);
         });
         resultsEl.appendChild(node);
-        if (i < end-1) {
-          const hr = document.createElement('hr');
-          hr.className = 'sw-sep';
-          resultsEl.appendChild(hr);
-        }
-      } else {
-        const wrap = document.createElement('div');
-        wrap.className = 'sw-block';
-        wrap.innerHTML = `
-          <p class="sw-found">Found in: <span class="sw-layer">${esc(layer)}</span></p>
-          <p class="sw-quote">${snippetHtml}</p>
-          <div class="sw-actions">
-            <a class="sw-btn" href="#">Go to Tutorial
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M9 18l6-6-6-6"></path>
-              </svg>
-            </a>
-          </div>`;
-        wrap.querySelector('.sw-btn').addEventListener('click', (e)=>{ e.preventDefault(); navigate?.(layer); });
-        resultsEl.appendChild(wrap);
-        if (i < end-1) {
-          const hr = document.createElement('hr'); hr.className = 'sw-sep';
-          resultsEl.appendChild(hr);
-        }
+        if (i < end-1) resultsEl.appendChild(Object.assign(document.createElement('hr'), {className:'sw-sep'}));
       }
     }
     return end;
   }
 
-  // --- persistence helpers (sessionStorage) ---
   function loadState(){
     try { return JSON.parse(sessionStorage.getItem(STORE_KEY) || '{}'); }
     catch { return {}; }
@@ -358,10 +321,7 @@
         b.type = 'button';
         b.className = 'sw-chip';
         b.textContent = word;
-        b.addEventListener('click', () => {
-          input.value = word;
-          run.flush?.();
-        });
+        b.addEventListener('click', () => { input.value = word; run.flush?.(); });
         suggestEl.appendChild(b);
       });
       if (suggestRow) suggestRow.hidden = false;
@@ -373,10 +333,8 @@
       const more = document.createElement('div');
       more.className = 'sw-actions';
       more.style.textAlign = 'center';
-
       const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'sw-btn sw-load';
+      btn.type = 'button'; btn.className = 'sw-btn sw-load';
       btn.textContent = 'Load more';
       btn.addEventListener('click', () => {
         more.remove();
@@ -384,37 +342,7 @@
         saveState(currentQ, rendered);
         showLoadMore();
       });
-
-      more.appendChild(btn);
-      resultsEl.appendChild(more);
-    }
-
-    function renderDidYouMean(list){
-      if (!list || !list.length) return;
-      const row = document.createElement('div');
-      row.className = 'sw-suggest-row';
-      const label = document.createElement('span');
-      label.className = 'sw-suggest-label';
-      label.textContent = 'Did you mean:';
-      row.appendChild(label);
-
-      const chipWrap = document.createElement('div');
-      chipWrap.className = 'sw-suggest';
-      row.appendChild(chipWrap);
-
-      list.forEach(word => {
-        const b = document.createElement('button');
-        b.type = 'button';
-        b.className = 'sw-chip';
-        b.textContent = word;
-        b.addEventListener('click', () => {
-          input.value = word;
-          run.flush?.();
-        });
-        chipWrap.appendChild(b);
-      });
-
-      resultsEl.appendChild(row);
+      more.appendChild(btn); resultsEl.appendChild(more);
     }
 
     function doSearchNow(){
@@ -423,65 +351,76 @@
       resultsEl.innerHTML = '';
 
       if (!q) {
-        ranked = [];
-        rendered = 0;
-        saveState('', 0);
-        renderSuggestions();
-        return;
+        ranked = []; rendered = 0; saveState('', 0);
+        renderSuggestions(); return;
       }
 
       hideSuggestions();
-
-      // relevance-ranked search (best match first)
       const scored = rankedSearch(q, INDEX);
-      ranked = scored; // keep score if you want to show it later
+      ranked = scored;
 
       if (ranked.length === 0) {
-        saveState(q, 0);
+        // Try valid corrections
+        const validCorrections = suggestCorrectionsForQuery(q, DICT, LOOK, INDEX);
+        if (validCorrections.length > 0) {
+          const best = validCorrections[0];
+          const correctedResults = rankedSearch(best, INDEX);
+          const note = document.createElement('div');
+          note.className = 'sw-block';
+          note.innerHTML = `<p class="sw-found" style="color:#9aa3b2"> 
+            Showing results for <span style="color:var(--blue);font-weight:700">“${esc(best)}”</span>.</p>`;
+          resultsEl.appendChild(note);
+          ranked = correctedResults;
+          rendered = renderBatch(resultsEl, ranked, 0, PAGE_SIZE, navigate);
+          saveState(best, rendered);
+          showLoadMore();
+          return;
+        }
+
+        // Otherwise: no valid correction either
         const none = document.createElement('div');
         none.className = 'sw-block';
         none.innerHTML = `<p class="sw-found" style="color:#9aa3b2">No match found.</p>`;
         resultsEl.appendChild(none);
-        renderDidYouMean(suggestCorrectionsForQuery(q, DICT, LOOK));
         return;
       }
 
-      // First page
       rendered = renderBatch(resultsEl, ranked, 0, PAGE_SIZE, navigate);
-
-      // If we're restoring the same query, re-expand to previous depth
       const state = loadState();
       if (state.q && state.q === q && state.rendered && state.rendered > rendered) {
         const target = Math.min(state.rendered, ranked.length);
         const need = target - rendered;
-        if (need > 0) {
-          rendered = renderBatch(resultsEl, ranked, rendered, need, navigate);
-        }
+        if (need > 0) rendered = renderBatch(resultsEl, ranked, rendered, need, navigate);
       }
-
       saveState(q, rendered);
       showLoadMore();
     }
 
     const run = debounce(doSearchNow, DEBOUNCE_MS);
     run.flush = doSearchNow;
+    input.addEventListener('input', (e) => {
+  const val = e.target.value.trim();
 
-    input.addEventListener('input', run);
+  // hide or show "Suggested" row instantly
+  if (suggestRow) {
+    if (val.length > 0) {
+      suggestRow.style.display = 'none';
+    } else {
+      suggestRow.style.display = '';
+    }
+  }
 
-    // Enter opens top result
+  run();
+});
+
+
     input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        if (ranked && ranked.length) navigate?.(ranked[0].layer);
-      }
+      if (e.key === 'Enter') { e.preventDefault(); if (ranked && ranked.length) navigate?.(ranked[0].layer); }
     });
-
     closeBtn?.addEventListener('click', () => close?.());
 
-    // initial state: restore last query if present
     const state = loadState();
     if (state.q) input.value = state.q;
-    // If empty -> show chips; otherwise render results for saved query (and depth)
     run.flush();
     setTimeout(() => input?.focus(), 0);
   };
