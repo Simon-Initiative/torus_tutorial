@@ -282,7 +282,6 @@
           e.preventDefault(); navigate?.(layer);
         });
         resultsEl.appendChild(node);
-        if (i < end-1) resultsEl.appendChild(Object.assign(document.createElement('hr'), {className:'sw-sep'}));
       }
     }
     return end;
@@ -308,6 +307,22 @@
     const INDEX = window.TUTORIAL_INDEX || [];
     const DICT  = buildDictionary(INDEX);
     const LOOK  = buildLookups(INDEX);
+
+    function updateSuggestionVisibility(q) {
+  if (!suggestRow) return;
+
+  if (q && q.trim().length > 0) {
+    suggestRow.style.display = 'none';
+  } else {
+    const state = loadState();
+    if (state.q && state.q.trim().length > 0) {
+      suggestRow.style.display = 'none';
+    } else {
+      suggestRow.style.display = '';
+    }
+  }
+}
+
 
     let ranked = [];
     let rendered = 0;
@@ -398,20 +413,12 @@
 
     const run = debounce(doSearchNow, DEBOUNCE_MS);
     run.flush = doSearchNow;
+    
     input.addEventListener('input', (e) => {
-  const val = e.target.value.trim();
+      updateSuggestionVisibility(e.target.value);
+    run();
+    });
 
-  // hide or show "Suggested" row instantly
-  if (suggestRow) {
-    if (val.length > 0) {
-      suggestRow.style.display = 'none';
-    } else {
-      suggestRow.style.display = '';
-    }
-  }
-
-  run();
-});
 
 
     input.addEventListener('keydown', (e) => {
@@ -420,8 +427,12 @@
     closeBtn?.addEventListener('click', () => close?.());
 
     const state = loadState();
-    if (state.q) input.value = state.q;
-    run.flush();
+if (state.q) input.value = state.q;
+
+updateSuggestionVisibility(input.value);
+
+run.flush();
+
     setTimeout(() => input?.focus(), 0);
   };
 })();
