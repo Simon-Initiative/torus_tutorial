@@ -1,0 +1,229 @@
+WEBVTT
+
+cue-1
+00:00:00.160 --> 00:00:03.760
+The first thing you need to do when
+integrating Torus to Canvas is to ensure
+
+cue-2
+00:00:03.760 --> 00:00:09.520
+that OLI Torus is registered as an LTI
+Advantage Tool in your institution's
+
+cue-3
+00:00:09.520 --> 00:00:14.560
+Canvas system. This is typically handled
+by a Canvas administrator. If your Canvas
+
+cue-4
+00:00:14.560 --> 00:00:19.300
+admin hasn't integrated OLI Torus yet,
+contact OLI support at
+
+cue-5
+00:00:19.300 --> 00:00:23.140
+oli-help@cmu.edu.
+
+cue-6
+00:00:24.040 --> 00:00:28.700
+Okay, now to place the OLI Torus link to
+Canvas, you have three options, the
+
+cue-7
+00:00:28.700 --> 00:00:35.080
+navigation menu, an assignment, or a
+module. Adding OLI Torus to the navigation
+
+cue-8
+00:00:35.080 --> 00:00:38.900
+menu is recommended if you and students
+need to enter it frequently. This will
+
+cue-9
+00:00:38.900 --> 00:00:45.880
+result in OLI Torus also being visible on
+the Canvas class homepage. Adding OLI
+
+cue-10
+00:00:45.880 --> 00:00:50.320
+as an assignment is the recommended
+placement. This allows you to place OLI in
+
+cue-11
+00:00:50.380 --> 00:00:54.320
+your weekly curriculum and assign the
+reading as homework or out-of-class
+
+cue-12
+00:00:54.320 --> 00:01:00.120
+activities. Adding OLI Torus as a module
+will allow students to navigate to OLI
+
+cue-13
+00:01:00.180 --> 00:01:04.920
+through the module view. To avoid
+confusion, add your Torus course link in
+
+cue-14
+00:01:04.920 --> 00:01:08.620
+only one place, navigation menu,
+assignments, or modules.
+
+cue-15
+00:01:10.600 --> 00:01:15.360
+Option one, add the link to the navigation
+menu. Go to Settings at the bottom of the
+
+cue-16
+00:01:15.360 --> 00:01:20.620
+Canvas navigation menu, click the
+Navigation tab on the top, and scroll to
+
+cue-17
+00:01:20.620 --> 00:01:26.780
+find OLI Torus, not the other ones under
+Disabled Items. Drag it up to the list of
+
+cue-18
+00:01:26.780 --> 00:01:31.940
+enabled navigation items and click Save.
+OLI Torus will now appear in your course's
+
+cue-19
+00:01:31.940 --> 00:01:36.670
+left-hand menu. Option two, add the link
+in an assignment.
+
+cue-20
+00:01:38.020 --> 00:01:43.960
+Click Assignments, Add Assignment, and add
+a title. This is what students will see
+
+cue-21
+00:01:43.960 --> 00:01:47.920
+when they click on Assignments in the
+Canvas class. Scroll down to Submission
+
+cue-22
+00:01:47.920 --> 00:01:50.600
+Type, select External Tool, click Find,
+
+cue-23
+00:01:51.480 --> 00:01:58.340
+choose OLI Torus from the list, and click
+Load in a New Tab. Click Save and
+
+cue-24
+00:01:58.340 --> 00:02:03.840
+Publish or Save. If necessary, publish the
+OLI Torus assignment by clicking the Not
+
+cue-25
+00:02:03.840 --> 00:02:09.940
+Published icon on the right side of the
+page. Option three, add the link in a
+
+cue-26
+00:02:09.940 --> 00:02:16.160
+module. Click Modules in the nav menu.
+Then create a new module. Give the module
+
+cue-27
+00:02:16.160 --> 00:02:21.400
+a name such as OLI Torus Course, or base
+the title on your Torus content, and click
+
+cue-28
+00:02:21.400 --> 00:02:22.340
+Add Module.
+
+cue-29
+00:02:24.000 --> 00:02:28.920
+In the new module, click the plus sign and
+select External Tool.
+
+cue-30
+00:02:31.020 --> 00:02:37.560
+Select OLI Torus from the list, update the
+title if you like, click Load in a New
+
+cue-31
+00:02:37.560 --> 00:02:40.100
+Tab, and click Add Item.
+
+cue-32
+00:02:42.000 --> 00:02:47.080
+Publish the OLI Torus module by clicking
+the Unpublished icon on the right end of
+
+cue-33
+00:02:47.080 --> 00:02:53.780
+the OLI Torus module. And once you've
+added the link to Canvas, it's time to
+
+cue-34
+00:02:53.780 --> 00:02:59.920
+configure your OLI Torus course materials
+for use with your students. Click the OLI
+
+cue-35
+00:02:59.920 --> 00:03:04.920
+Torus link you just added to load it in a
+new tab and configure your OLI Torus
+
+cue-36
+00:03:04.920 --> 00:03:11.760
+materials. Click Start and follow the
+prompts. Select a source material to base
+
+cue-37
+00:03:11.760 --> 00:03:18.150
+your course on. Use the search feature to
+find the desired content if necessary. Now
+
+cue-38
+00:03:18.150 --> 00:03:22.500
+enter basic info link, course name,
+course section number, can be a catalog
+
+cue-39
+00:03:22.500 --> 00:03:26.580
+number or CRN, for example, and modality
+for how class meets
+
+cue-40
+00:03:27.340 --> 00:03:28.750
+and other course details.
+
+cue-41
+00:03:31.200 --> 00:03:33.680
+Voila, your section has now been created.
+
+cue-42
+00:03:35.140 --> 00:03:39.780
+Note that once set up, all links will
+point to the same OLI Torus course no
+
+cue-43
+00:03:39.780 --> 00:03:44.090
+matter where students access it from in
+Canvas. Students have no OLI Torus
+
+cue-44
+00:03:44.090 --> 00:03:49.380
+accounts. They will access everything from
+the Canvas link. There you have it. In
+
+cue-45
+00:03:49.380 --> 00:03:53.820
+just a few steps, you can add and
+configure OLI Torus in your Canvas course.
+
+cue-46
+00:03:53.820 --> 00:03:57.160
+If you need to unlink a course, contact
+OLI support at
+
+cue-47
+00:03:57.160 --> 00:04:04.700
+oli-help@cmu.edu.
