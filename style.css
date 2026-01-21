@@ -14,11 +14,12 @@
   --hover: #f3f4f6;
   --radius: 12px;
   --shadow: 0 8px 24px rgba(17,24,39,.06);
+   --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /* Base */
 * { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 "Inter","Open Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
+html, body { height: 100%; margin: 0; background: var(--bg); color: var(--text);  font: 16px/1.6 "Inter","Open Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
 
 /* Header */
 .header { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: #fff; border-bottom: 1px solid var(--border); }
@@ -161,6 +162,15 @@ html, body { height: 100%; margin: 0; background: var(--bg); color: var(--text);
   padding-left: 10px;
 }
 
+
+.submenu li .title {
+  font: inherit;
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: none;
+}
+
+
 .submenu.collapsed { display: none; }
 .submenu li {
   display: flex;
@@ -182,7 +192,7 @@ html, body { height: 100%; margin: 0; background: var(--bg); color: var(--text);
 .submenu li.selected {
   background: var(--lilac);
   border-color: var(--lilac-border);
-  color: #3b2c58;
+  color: #2e175b;
 }
 .submenu li .badge::after { content: attr(data-label); }
 .submenu li .badge { margin-left: 12px; white-space: nowrap; }

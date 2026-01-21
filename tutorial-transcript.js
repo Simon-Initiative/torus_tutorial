@@ -1,7 +1,16 @@
 // tutorial-transcript.js
 
-window.TUTORIAL_INDEX = [
 
+// !!!README: 
+// This file contains the video transcipt for each tutorial in the tutorial index.
+// Each object in the TUTORIAL_INDEX array has a title and a transcript property.
+// The title is used to identify the tutorial, and the transcript contains the text to be searched.
+
+
+window.TUTORIAL_INDEX = [
+  // ============================
+  // === Set Up Your Course =====
+  // ============================
   {
     title: "Course Author Page Overview",
     transcript: "Course Author Page Overview: This is the course author landing page. On the left side, you will see the workspace menu, which confirms that you are logged in as an author. If you ever need to switch roles, you can do so by selecting a different role from this menu. On a course author page, you will find a list of all your projects, also known as courses. From here you can easily access each project. Now, let's get started by creating a new project."
@@ -46,6 +55,11 @@ window.TUTORIAL_INDEX = [
     title: "Transformation Payment Code",
     transcript: "Transformation Payment Code: ..."
   },
+
+
+  // ============================
+  // === Develop Your Course ====
+  // ============================
 
   {
     title: "Learning Objectives",
@@ -92,4 +106,10 @@ window.TUTORIAL_INDEX = [
     transcript: "Add Paragraph: Torus allows you to add multiple kinds of content to a page. When you first enter a new page, you will see the entry box where you will be able to author your content. At the bottom, you will see Insert Content, which is the small plus icon with a line indicating its position. You will always see this button while you edit a page. Above that, you will see the instructions “Type here or use + to begin…” The new page has pre-created a paragraph block to help you begin adding content. In a paragraph block, you can add rich content such as text, images, tables, YouTube, etc. First, of course, you can add text by typing directly. For more options, you can use the menu that appears when you click inside the paragraph block. You can bold and italicize, format your text as code, and add hyperlinks."
   }
 
+
+
+  // ============================
+  // === Publish Your Course ====
+  // ============================
+  
 ];

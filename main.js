@@ -8,9 +8,8 @@ console.log('main.js loaded');
   const $all = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   const $ = (sel, root = document) => root.querySelector(sel);
 
-  // =============================================================
+
 // Load welcome page by default on first visit
-// =============================================================
 window.addEventListener("DOMContentLoaded", () => {
   const content = document.querySelector(".content");
   if (content) {
@@ -18,7 +17,6 @@ window.addEventListener("DOMContentLoaded", () => {
       .then(r => r.text())
       .then(html => {
         content.innerHTML = html;
-        // Optionally highlight the matching menu item
         const li = document.querySelector('.submenu li[data-page="pages/welcome.html"]');
         if (li) {
           document.querySelectorAll(".submenu li.selected").forEach(el => el.classList.remove("selected"));
@@ -28,7 +26,6 @@ window.addEventListener("DOMContentLoaded", () => {
       .catch(err => console.error("Error loading welcome page:", err));
   }
 });
-
 
 
   // clean up badges in the sidebar so text isn’t duplicated in labels
@@ -49,6 +46,7 @@ window.addEventListener("DOMContentLoaded", () => {
 document.addEventListener('click', function (event) {
   const target = event.target.closest('[data-page]');
   if (!target) return;
+  if (target.querySelector('a[href]')) return;
   setActiveMenuItem(target);
 
   // Prevent full page reload
@@ -56,7 +54,10 @@ document.addEventListener('click', function (event) {
 
   const page = target.getAttribute('data-page');
   if (!page) return;
-  
+
+ history.pushState({ page }, '', `?page=${encodeURIComponent(page)}`);
+
+
   // Load the HTML into the main content area
   fetch(page)
     .then(response => response.text())
@@ -191,6 +192,7 @@ document.addEventListener('click', function (event) {
   const homeBtn = document.querySelector('.home-btn');
   if (homeBtn) {
     homeBtn.addEventListener('click', () => {
+      selectMenuItem(homeBtn);
       const li = document.querySelector(`.submenu li[data-page="${HOME_TARGET_PAGE}"]`);
       if (!li) return console.warn('Home target not found:', HOME_TARGET_PAGE);
 
