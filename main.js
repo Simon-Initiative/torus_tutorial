@@ -4,7 +4,7 @@ console.log('main.js loaded');
 
 
 (function () {
-  // --- small DOM helpers ---
+  // --- DOM helpers ---
   const $all = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   const $ = (sel, root = document) => root.querySelector(sel);
 
@@ -12,20 +12,34 @@ console.log('main.js loaded');
 // Load welcome page by default on first visit
 window.addEventListener("DOMContentLoaded", () => {
   const content = document.querySelector(".content");
-  if (content) {
-    fetch("pages/introduction/welcome.html")
-      .then(r => r.text())
-      .then(html => {
-        content.innerHTML = html;
-        const li = document.querySelector('.submenu li[data-page="pages/welcome.html"]');
-        if (li) {
-          document.querySelectorAll(".submenu li.selected").forEach(el => el.classList.remove("selected"));
-          li.classList.add("selected");
-        }
-      })
-      .catch(err => console.error("Error loading welcome page:", err));
+  if (!content) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const pageFromUrl = params.get("page");
+
+  if (pageFromUrl) {
+    loadPage(pageFromUrl);
+
+    const li = document.querySelector(`.submenu li[data-page="${pageFromUrl}"]`);
+    if (li) {
+      document
+        .querySelectorAll(".submenu li.selected")
+        .forEach(el => el.classList.remove("selected"));
+      li.classList.add("selected");
+    }
+
+    return;
   }
+
+  // fallback only when no ?page=
+  fetch("pages/introduction/welcome.html")
+    .then(r => r.text())
+    .then(html => {
+      content.innerHTML = html;
+    })
+    .catch(err => console.error("Error loading welcome page:", err));
 });
+
 
 
   // clean up badges in the sidebar so text isn’t duplicated in labels
@@ -319,6 +333,5 @@ document.addEventListener('click', (e) => {
   li.classList.add('spotlight');
   setTimeout(() => li.classList.remove('spotlight'), 1100);
 });
-
 
 })();
