@@ -14,7 +14,7 @@
     <div class="header-left">
       <button id="menu-toggle" class="menu-toggle">☰</button>
 
-      <a href="#" class="brand" aria-label="OLI Torus Launchpad (home)">
+      <a href="/" class="brand" aria-label="OLI Torus Launchpad (home)">
   <img src="assets/images/logo.png" alt="" class="brand-logo" aria-hidden="true" />
   <span class="brand-oli">OLI</span>
   <span class="brand-torus">Torus</span>
@@ -33,13 +33,12 @@
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
       </a>
-<button
-  class="feedback-btn"
-  aria-label="Feedback"
-  onclick="openFeedback()">
+<a href="https://forms.gle/3ta7TqVyWjRdgTmx9" 
+   target="_blank" 
+   class="feedback-btn" 
+   aria-label="Feedback">
   <img src="assets/images/feedback.png" alt="Feedback" class="feedback-icon" />
-</button>
-
+</a>
 
       <button class="home-btn" aria-label="Home" data-page="pages/introduction/logging-in.html">
   <img src="assets/images/home.png" alt="Home" class="home-icon" />
@@ -254,15 +253,9 @@
     </main>
   </div>
 
- <script src="main.js"></script>
-<script src="feedback-loader.js" defer></script>
-
-<div id="feedbackOverlay" hidden></div>
-<div id="feedbackModal" hidden></div>
-
-<div id="searchOverlay" hidden></div>
-<div id="searchModal" hidden></div>
-<script src="search-wrapper-loader.js" defer></script>
-
+  <script src="main.js"></script>
+  <div id="searchOverlay" hidden></div>
+  <div id="searchModal" hidden></div>
+  <script src="search-wrapper-loader.js" defer></script>
 </body>
 </html>
