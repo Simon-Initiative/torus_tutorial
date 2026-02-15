@@ -6,6 +6,7 @@
   --text: #1f2937;
   --muted: #4b5563;
   --blue: #1877F2;
+  --green: #34A853;
   --blue-dark: #0f67d1;
   --pink: #EBAAF2;
   --pink-light: #F7DEF8;
@@ -14,11 +15,12 @@
   --hover: #f3f4f6;
   --radius: 12px;
   --shadow: 0 8px 24px rgba(17,24,39,.06);
+   --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /* Base */
 * { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 "Inter","Open Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
+html, body { height: 100%; margin: 0; background: var(--bg); color: var(--text);  font: 16px/1.6 "Inter","Open Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
 
 /* Header */
 .header { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: #fff; border-bottom: 1px solid var(--border); }
@@ -90,7 +92,7 @@ html, body { height: 100%; margin: 0; background: var(--bg); color: var(--text);
   width: 24px;
   height: 24px;
   object-fit: contain;
-  filter: brightness(0) invert(1); /* makes white on blue */
+  filter: brightness(0) invert(1); 
 }
 
 
@@ -125,9 +127,6 @@ html, body { height: 100%; margin: 0; background: var(--bg); color: var(--text);
 /* responsive: hide subtitle (and optionally logo) on small screens */
 @media (max-width: 640px){
   .brand-sub { display:none; }
-  /* uncomment to hide logo on small screens:
-  .brand-logo { display:none; }
-  */
 }
 
 @media (max-width: 960px) { .main-container { grid-template-columns: 1fr; } }
@@ -161,6 +160,15 @@ html, body { height: 100%; margin: 0; background: var(--bg); color: var(--text);
   padding-left: 10px;
 }
 
+
+.submenu li .title {
+  font: inherit;
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: none;
+}
+
+
 .submenu.collapsed { display: none; }
 .submenu li {
   display: flex;
@@ -182,7 +190,7 @@ html, body { height: 100%; margin: 0; background: var(--bg); color: var(--text);
 .submenu li.selected {
   background: var(--lilac);
   border-color: var(--lilac-border);
-  color: #3b2c58;
+  color: #2e175b;
 }
 .submenu li .badge::after { content: attr(data-label); }
 .submenu li .badge { margin-left: 12px; white-space: nowrap; }
@@ -221,17 +229,46 @@ html, body { height: 100%; margin: 0; background: var(--bg); color: var(--text);
 /* Video container */
 .video-container { width: 100%; max-width: 1100px; margin: 24px auto 0; }
 .video-container video { width: 100%; height: auto; display: block; background: #000; border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow); }
-.title-bar { width: 100%; max-width: 1100px; margin: 12px auto 0; padding: 10px 14px; border-radius: 10px; background: #e9f2ff; color: #0f3d8a; font-weight: 700; border: 1px solid #d6e6ff; }
+.title-bar { width: 100%; max-width: 1100px; margin: 12px auto 0; padding: 10px 14px; border-radius: 10px; background: #e9f2ff; color: #0f3d8a; font-weight: 700; border: 1px solid #d6e6ff;  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;}
 .page-content { width: 100%; max-width: 1100px; margin: 14px auto 20px; padding: 0 2px; color: var(--muted); }
 .page-content h2 { color: #111827; margin: 8px 0 6px; }
 .page-content p { margin: 8px 0; }
+.video-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+.version-badge {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: #3730a3;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  padding: 4px 10px;
+  border-radius: 999px;
+  text-align: right;
+}
+.version-badge strong {
+  font-weight: 900;
+}
 
 /* Buttons */
 .button { background: var(--blue); color: #fff; border: none; padding: 10px 14px; border-radius: 10px; cursor: pointer; }
 .button:hover { background: var(--blue-dark); }
 
 /* Caret */
-.caret { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:8px; color:#9aa0ae; transition: background .15s ease, color .15s ease; }
+.caret { 
+  display:inline-grid; 
+  place-items:center; 
+  width:30px; 
+  height:30px;
+  border-radius:8px; 
+  color:#9aa0ae; 
+  transition: background .15s ease, color .15s ease; 
+}
 .section-title .caret svg { transition: transform .18s ease; transform-origin: 50% 50%; }
 .section-title.open .caret svg { transform: rotate(90deg); }
 @media (max-width: 480px) { .caret{ width:24px; height:24px; border-radius:7px; } }
@@ -283,13 +320,172 @@ html, body { height: 100%; margin: 0; background: var(--bg); color: var(--text);
    =============================== */
 html, body {
   height: 100%;
-  overflow: hidden; /* lock page scroll */
+  overflow: hidden; 
 }
 
 .sidebar, .content {
   overflow: auto;
-  max-height: calc(100vh - 56px); /* adjust if header height changes */
+  max-height: calc(100vh - 56px); 
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 }
 
+/* ================================
+   Feedback Modal – Final Polished UI
+================================ */
+#feedbackOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 9998;
+  backdrop-filter: blur(1px);
+}
+
+#feedbackModal {
+  position: fixed;
+  left: 50%;
+  top: 10%;
+  transform: translateX(-50%);
+  width: min(92vw, 820px);
+  max-height: 80vh;
+  overflow: auto;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 12px 28px rgba(0,0,0,.18);
+  z-index: 9999;
+  padding:20px 22px 24px; 
+}
+
+/* ================================
+   Feedback wrapper (match search)
+================================ */
+.feedback-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: sans-serif
+}
+
+/* Header */
+.feedback-wrapper .sw-header {
+  display:flex; 
+  align-items:center; 
+  gap:14px; 
+  margin:2px 0 16px;
+}
+
+.feedback-wrapper .sw-title {
+  margin:0; font-size:28px; line-height:1.1; font-weight:700; color:var(--green); letter-spacing:.2px; 
+}
+
+/* Close button */
+.feedback-wrapper .sw-close {
+  margin-left: auto;
+  color: #34A853;
+  cursor: pointer;
+  background:none; 
+  border:0;
+}
+
+
+/* ================================
+   Form container (scroll behavior)
+================================ */
+.feedback-form {
+  max-height: calc(80vh - 140px); 
+  font-size: 18px;;
+  overflow-y: auto;
+}
+
+/* Field blocks */
+.feedback-form .field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px; 
+}
+
+/* Labels */
+.feedback-form label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827; /* same as search text */
+}
+
+/* ================================
+   Inputs & textarea (search style)
+================================ */
+.feedback-form .sw-input {
+  width:100%; padding:18px 20px; font-size:18px; color:var(--ink); background:var(--white);
+    border:1.5px solid #c9ced8; border-radius:18px; outline:none; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Focus state */
+.feedback-form .sw-input:focus {
+  outline: none;
+  border-color: #34A853;
+  box-shadow: 0 0 0 3px rgba(52, 168, 83, 0.25);
+}
+
+/* Textarea */
+.feedback-form textarea.sw-input {
+  min-height: 96px;
+  border-radius: 12px;
+  resize: vertical;
+}
+
+/* Placeholder */
+#searchModal .sw-input::placeholder{ color:#9aa3b2; }
+
+/* ================================
+   Select arrow (search-style)
+================================ */
+.feedback-form select.sw-input {
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #6b7280 50%),
+    linear-gradient(135deg, #6b7280 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) calc(50% - 3px),
+    calc(100% - 12px) calc(50% - 3px);
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+}
+
+/* ================================
+   Actions (match search buttons)
+================================ */
+.feedback-wrapper .sw-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+/* Submit button */
+.feedback-wrapper .sw-btn {
+  background: #34A853;
+  color: #fff;
+  border-radius: 999px;
+  font-size: 14px;       /* search button size */
+  font-weight: 600;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.feedback-wrapper .sw-btn:hover {
+  background: #2c8f46;
+}
+
+/* Remove arrow icon (keep text-only like search) */
+.feedback-wrapper .sw-btn svg {
+  display: none;
+}
+
+.sw-icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  color: var(--green);
+}
