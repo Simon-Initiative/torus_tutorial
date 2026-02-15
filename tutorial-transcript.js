@@ -1,16 +1,7 @@
 // tutorial-transcript.js
 
-
-// !!!README: 
-// This file contains the video transcipt for each tutorial in the tutorial index.
-// Each object in the TUTORIAL_INDEX array has a title and a transcript property.
-// The title is used to identify the tutorial, and the transcript contains the text to be searched.
-
-
 window.TUTORIAL_INDEX = [
-  // ============================
-  // === Set Up Your Course =====
-  // ============================
+
   {
     title: "Course Author Page Overview",
     transcript: "Course Author Page Overview: This is the course author landing page. On the left side, you will see the workspace menu, which confirms that you are logged in as an author. If you ever need to switch roles, you can do so by selecting a different role from this menu. On a course author page, you will find a list of all your projects, also known as courses. From here you can easily access each project. Now, let's get started by creating a new project."
@@ -56,11 +47,6 @@ window.TUTORIAL_INDEX = [
     transcript: "Transformation Payment Code: ..."
   },
 
-
-  // ============================
-  // === Develop Your Course ====
-  // ============================
-
   {
     title: "Learning Objectives",
     transcript: "Learning Objectives: Objectives will take you to the Learning Objectives page. Learning objectives are the basis of educational data analysis and engineering student success. Refer to the linked CMU Eberly Center guide on learning objectives to understand the importance of attaching objectives to pages and activities. To create a learning objective, click ‘Create New Objective’ here. Enter your text in the dialogue box, then click ‘Create’. Now, you’ll see a list of all your learning objectives displayed here. On the right side, you can track how many pages and activities in your course are using each objective."
@@ -105,17 +91,8 @@ window.TUTORIAL_INDEX = [
     title: "Add Paragraph",
     transcript: "Add Paragraph: Torus allows you to add multiple kinds of content to a page. When you first enter a new page, you will see the entry box where you will be able to author your content. At the bottom, you will see Insert Content, which is the small plus icon with a line indicating its position. You will always see this button while you edit a page. Above that, you will see the instructions “Type here or use + to begin…” The new page has pre-created a paragraph block to help you begin adding content. In a paragraph block, you can add rich content such as text, images, tables, YouTube, etc. First, of course, you can add text by typing directly. For more options, you can use the menu that appears when you click inside the paragraph block. You can bold and italicize, format your text as code, and add hyperlinks."
   },
-
-
-
-
-  // ============================
-  // === Publish Your Course ====
-  // ============================
   
-
-
-  // instructors
+// instructors
   {
     title: "Add and configure OLI Torus in Canvas course",
     transcript: "Add and configure OLI Torus in Canvas course: The first thing you need to do when integrating Torus to Canvas is to ensure that OLI Torus is registered as an LTI Advantage tool in your institution’s Canvas system. This is typically handled by a Canvas administrator. If your Canvas admin hasn't integrated OLI Torus yet, contact OLI Support at oli-help@cmu.edu. Okay, now, to place the OLI Torus link to Canvas, you have three options: The navigation menu An assignment Or a module. Adding OLI Torus to the navigation menu is recommended if you and students need to enter it frequently. This will result in OLI Torus also being visible on the Canvas class Home page. Adding OLI as an assignment is the recommended placement. This allows you to place OLI in your weekly curriculum and assign the reading as homework or out-of-class activities. Adding OLI Torus as a Module will allow students to navigate to OLI through the module view. To learn more, see OPTION 3. To avoid confusion, add your OLI Torus course link in only one place, Navigation Menu, Assignments, or Modules.OPTION 1: Add the link to the Navigation Menu. Go to Settings at the bottom of the Canvas navigation menu. Click the Navigation tab on the top and scroll to find “OLI Torus” (not the other ones) under disabled items. Drag it up to the list of enabled navigation items and click Save. OLI Torus will now appear in your course’s left-hand menu.\
@@ -143,4 +120,6 @@ window.TUTORIAL_INDEX = [
     title: "Manage course - miscellaneous",
     transcript: "Manage course - miscellaneous: Hi, I’m Eadin from the Open Learning Initiative. In this video, I’ll show you some other settings you can play with to manage your course. The settings include course discussions, collaborative spaces, notes, and manual scoring. Let’s get started. Under the course’s Discussion Activities, you will find the details of student posts if your course involves any discussion. You can also filter to see 'Posts that Need Approval' and 'Posts Awaiting a Reply'. Going back to your course’s Manage tab, scroll down and you can find 'Browse Collaborative Spaces' next to Manage. If your course has a collaborative space, you may enter it here. Scroll down a little more, you can enable notes for your course. The notes are essentially a notebook for students within the course page. This allows students to annotate content for saving, and sharing within the class. Once enabled, it will apply to all pages in your course. Click OK to confirm. Lastly, you can also enter the manual scoring space here if your course involves activities to be graded manually. Click on manual scoring next to Scoring to see the list of activities. Select the one you want to score, and scroll down to see detailed student answers, and the place to enter your input. Note that aside from the score, you have to give some feedback in order to apply your scoring. Use the score short-cut button to save your time. Once you apply your score and feedback, the page will automatically jump to the next one in line. If you have additional questions, visit our OLI Help page."
   }
+
+
 ];
