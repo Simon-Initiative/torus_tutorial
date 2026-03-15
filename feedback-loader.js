@@ -3,7 +3,7 @@
  *************************************************/
 
 const FEEDBACK_ENDPOINT =
-  "https://script.google.com/macros/s/AKfycbwH1QM0zc4DcYXcG0CJIVoien-vj8VmCi0wEUxeEdZX0EbROxx6rWvLgIi2vSHtd9TBIQ/exec";
+  "https://script.google.com/macros/s/AKfycbyC5Oe1UgXd7gjtCexS9hYJiHh7XObWM1zcRT4FLlX8Lnoweu_LNX8bFp4dGNWzjr-Rew/exec";
 
 /* Wire button safely */
 document.addEventListener("DOMContentLoaded", () => {
@@ -29,31 +29,27 @@ window.openFeedback = function () {
       <!-- Header -->
       <div class="sw-header">
         <svg
-  class="sw-icon"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
-  aria-hidden="true"
->
-  <!-- Taller speech bubble -->
-  <path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 5v-5H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
-
-  <!-- Dots (spread out more) -->
-  <circle cx="8"  cy="11.5" r="1" fill="currentColor" stroke-width="0.8" />
-  <circle cx="12" cy="11.5" r="1" fill="currentColor" stroke-width="0.8"/>
-  <circle cx="16" cy="11.5" r="1" fill="currentColor" stroke-width="0.8" />
-</svg>
-
+          class="sw-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 5v-5H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
+          <circle cx="8"  cy="11.5" r=".5" fill="currentColor" />
+          <circle cx="12" cy="11.5" r=".5" fill="currentColor" />
+          <circle cx="16" cy="11.5" r=".5" fill="currentColor" />
+        </svg>
 
         <h2 class="sw-title">Send Feedback</h2>
         <button class="sw-close" data-feedback-close aria-label="Close feedback">
-           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="3">
-        <line x1="18" y1="6"  x2="6"  y2="18"></line>
-        <line x1="6"  y1="6"  x2="18" y2="18"></line>
-      </svg>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="3">
+            <line x1="18" y1="6"  x2="6"  y2="18"></line>
+            <line x1="6"  y1="6"  x2="18" y2="18"></line>
+          </svg>
         </button>
       </div>
 
@@ -113,22 +109,22 @@ function attachFeedbackHandlers() {
     e.preventDefault();
 
     const formData = new FormData(form);
-    formData.append("timestamp_client", new Date().toISOString());
-    formData.append(
-      "timezone",
-      Intl.DateTimeFormat().resolvedOptions().timeZone
-    );
-    formData.append("page", window.location.href);
 
-    await fetch(FEEDBACK_ENDPOINT, {
-      method: "POST",
-      body: new URLSearchParams(formData),
-    });
+    try {
+      await fetch(FEEDBACK_ENDPOINT, {
+        method: "POST",
+        mode: "no-cors", 
+        body: new URLSearchParams(formData),
+      });
+    } catch (err) {
+      console.warn("Feedback submission failed:", err);
+    }
 
     form.innerHTML = `
       <div class="sw-results">
         <p><strong>Thank you!</strong></p>
         <p>Your feedback has been submitted.</p>
+        <p>If you included your email, our team may follow up with you.</p>
       </div>
     `;
   });

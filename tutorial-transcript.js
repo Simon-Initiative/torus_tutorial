@@ -1,10 +1,12 @@
 // tutorial-transcript.js
 
 
-// !!!README: 
-// This file contains the video transcipt for each tutorial in the tutorial index.
+// README: 
+// This file contains the video transcript for each tutorial in the tutorial index.
 // Each object in the TUTORIAL_INDEX array has a title and a transcript property.
-// The title is used to identify the tutorial, and the transcript contains the text to be searched.
+// The "title" is used to identify the tutorial, and the "transcript" contains the text to be searched.
+
+// PLEASE KEEP THE SAME FORMAT WHEN ADDING NEW TUTORIALS!
 
 
 window.TUTORIAL_INDEX = [
@@ -111,5 +113,18 @@ window.TUTORIAL_INDEX = [
   // ============================
   // === Publish Your Course ====
   // ============================
+
+  // ============================
+  // ==== Link Course to LMS ====
+  // ============================
+
+
+  // ===================================
+  // ==== Scheduling and Assessment ====
+  // ===================================
+
+  // ===========================================
+  // === Course Overview & Student Insights ====
+  // ===========================================
   
 ];
