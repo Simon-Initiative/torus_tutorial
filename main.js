@@ -4,40 +4,29 @@ console.log('main.js loaded');
 
 
 (function () {
-  // --- DOM helpers ---
+  // --- small DOM helpers ---
   const $all = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   const $ = (sel, root = document) => root.querySelector(sel);
 
-
+  // =============================================================
 // Load welcome page by default on first visit
+// =============================================================
 window.addEventListener("DOMContentLoaded", () => {
   const content = document.querySelector(".content");
-  if (!content) return;
-
-  const params = new URLSearchParams(window.location.search);
-  const pageFromUrl = params.get("page");
-
-  if (pageFromUrl) {
-    loadPage(pageFromUrl);
-
-    const li = document.querySelector(`.submenu li[data-page="${pageFromUrl}"]`);
-    if (li) {
-      document
-        .querySelectorAll(".submenu li.selected")
-        .forEach(el => el.classList.remove("selected"));
-      li.classList.add("selected");
-    }
-
-    return;
+  if (content) {
+    fetch("pages/introduction/welcome.html")
+      .then(r => r.text())
+      .then(html => {
+        content.innerHTML = html;
+        // Optionally highlight the matching menu item
+        const li = document.querySelector('.submenu li[data-page="pages/welcome.html"]');
+        if (li) {
+          document.querySelectorAll(".submenu li.selected").forEach(el => el.classList.remove("selected"));
+          li.classList.add("selected");
+        }
+      })
+      .catch(err => console.error("Error loading welcome page:", err));
   }
-
-  // fallback only when no ?page=
-  fetch("pages/introduction/welcome.html")
-    .then(r => r.text())
-    .then(html => {
-      content.innerHTML = html;
-    })
-    .catch(err => console.error("Error loading welcome page:", err));
 });
 
 
@@ -60,7 +49,6 @@ window.addEventListener("DOMContentLoaded", () => {
 document.addEventListener('click', function (event) {
   const target = event.target.closest('[data-page]');
   if (!target) return;
-  if (target.querySelector('a[href]')) return;
   setActiveMenuItem(target);
 
   // Prevent full page reload
@@ -68,10 +56,7 @@ document.addEventListener('click', function (event) {
 
   const page = target.getAttribute('data-page');
   if (!page) return;
-
- history.pushState({ page }, '', `?page=${encodeURIComponent(page)}`);
-
-
+  
   // Load the HTML into the main content area
   fetch(page)
     .then(response => response.text())
@@ -206,7 +191,6 @@ document.addEventListener('click', function (event) {
   const homeBtn = document.querySelector('.home-btn');
   if (homeBtn) {
     homeBtn.addEventListener('click', () => {
-      selectMenuItem(homeBtn);
       const li = document.querySelector(`.submenu li[data-page="${HOME_TARGET_PAGE}"]`);
       if (!li) return console.warn('Home target not found:', HOME_TARGET_PAGE);
 
@@ -333,5 +317,6 @@ document.addEventListener('click', (e) => {
   li.classList.add('spotlight');
   setTimeout(() => li.classList.remove('spotlight'), 1100);
 });
+
 
 })();
